@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Instructor Dashboard | LearnSpace{% endblock %}
+{% block content %}
+<section class="container dashboard">
+  <p class="eyebrow">INSTRUCTOR DASHBOARD</p>
+  <h1 id="welcome">Instructor dashboard</h1>
+  <div class="section-heading"><div><h2>My courses</h2><p class="page-description">Open a course to manage its classes, tasks, and student work.</p></div><button class="button small" onclick="toggleCourseForm()">Add course</button></div>
+  <form id="course-form" class="inline-form hidden"><input name="title" placeholder="Course title" required><input name="code" placeholder="course-code" required><input name="description" placeholder="Short description" required><select name="status"><option value="draft">Draft</option><option value="published">Published</option></select><button class="button small">Save course</button></form>
+  <p class="form-message" id="form-message"></p>
+  <div id="instructor-course-list" class="card-grid"><p>Loading courses…</p></div>
+</section>
+{% endblock %}
+{% block scripts %}<script>document.querySelector('#course-form').addEventListener('submit', createCourse);loadInstructorDashboard();</script>{% endblock %}

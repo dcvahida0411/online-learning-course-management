@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Student Registration | LearnSpace{% endblock %}
+{% block content %}
+<section class="auth-wrap"><form id="register-form" class="auth-card">
+  <p class="eyebrow">STUDENT REGISTRATION</p><h1>Create student account</h1>
+  <label>Username<input name="username" minlength="3" maxlength="150" required autocomplete="username"></label>
+  <label>First name<input name="first_name" pattern="[A-Za-z][A-Za-z .'-]*" title="Use letters and spaces only." autocomplete="given-name"></label>
+  <label>Last name<input name="last_name" pattern="[A-Za-z][A-Za-z .'-]*" title="Use letters and spaces only." autocomplete="family-name"></label>
+  <label>Email<input name="email" type="email" required autocomplete="email" placeholder="name@example.com"></label>
+  <label>Password<input name="password" type="password" minlength="8" required autocomplete="new-password" placeholder="Minimum 8 characters"></label>
+  <p class="field-help">Names cannot contain numbers. Use a valid, unused email address.</p>
+  <p class="form-message" id="form-message"></p><button class="button" type="submit">Register</button>
+  <p>Already registered? <a href="/student/login/">Student login</a></p>
+</form></section>
+{% endblock %}
+{% block scripts %}<script>document.querySelector('#register-form').addEventListener('submit', register);</script>{% endblock %}

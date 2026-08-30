@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Administrator Dashboard | LearnSpace{% endblock %}
+{% block content %}
+<section class="container dashboard admin-dashboard">
+  <p class="eyebrow">ADMINISTRATOR DASHBOARD</p>
+  <div class="dashboard-title-row">
+    <div><h1 id="admin-welcome">Platform overview</h1><p class="page-description">Monitor learning activity and manage all platform data.</p></div>
+    <a class="button" href="/admin/">Open Django admin</a>
+  </div>
+  <div id="admin-stats" class="stat-grid"><p>Loading platform data…</p></div>
+  <section class="admin-section task-creator">
+    <div class="section-heading"><h2>Create task</h2><button class="button small" type="button" onclick="toggleAdminTaskForm()">Add task</button></div>
+    <form id="admin-task-form" class="inline-form hidden">
+      <select name="course" id="admin-task-course" required></select>
+      <input name="title" placeholder="Task title" required>
+      <input name="due_date" type="datetime-local" required>
+      <input name="max_marks" type="number" min="1" value="100" required>
+      <input name="instructions" placeholder="Task instructions" required>
+      <button class="button small">Save task</button>
+    </form>
+    <p id="admin-task-message" class="form-message"></p>
+  </section>
+  <section class="admin-section">
+    <div class="section-heading"><h2>Users</h2><a href="/admin/users/user/" class="text-link">Manage users</a></div>
+    <div id="admin-user-list" class="table-wrap"></div>
+  </section>
+  <section class="admin-section">
+    <div class="section-heading"><h2>Courses</h2><a href="/admin/courses/course/" class="text-link">Manage courses</a></div>
+    <div id="admin-course-list" class="table-wrap"></div>
+  </section>
+  <section class="admin-section">
+    <div class="section-heading"><h2>Recent submissions</h2><a href="/admin/assignments/submission/" class="text-link">Manage submissions</a></div>
+    <div id="admin-submission-list" class="table-wrap"></div>
+  </section>
+</section>
+{% endblock %}
+{% block scripts %}<script>loadAdminDashboard();</script>{% endblock %}

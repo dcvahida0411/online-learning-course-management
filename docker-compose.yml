@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: learnspace
+      POSTGRES_USER: learnspace
+      POSTGRES_PASSWORD: change-this-password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U learnspace -d learnspace"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    command: sh -c "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SECRET_KEY: replace-with-a-long-random-production-secret-key
+      DJANGO_DEBUG: "false"
+      DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+      DB_ENGINE: postgresql
+      POSTGRES_DB: learnspace
+      POSTGRES_USER: learnspace
+      POSTGRES_PASSWORD: change-this-password
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

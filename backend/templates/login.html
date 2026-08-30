@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ account_type }} Login | LearnSpace{% endblock %}
+{% block content %}
+<section class="auth-wrap">
+  <form id="login-form" class="auth-card">
+    <input name="expected_role" type="hidden" value="{{ expected_role }}">
+    <p class="eyebrow">{{ account_type|upper }} PORTAL</p>
+    <h1>{{ account_type }} login</h1>
+    <label>Username<input name="username" required></label>
+    <label>Password<input name="password" type="password" required></label>
+    <p class="form-message" id="form-message"></p>
+    <button class="button" type="submit">Login</button>
+    {% if expected_role == 'student' %}
+      <p>New student? <a href="/student/register/">Register here</a></p>
+      <p>Already registered? Use this page to log in.</p>
+    {% else %}
+      <p>Instructor and administrator accounts are created by an administrator.</p>
+    {% endif %}
+    <p><a href="/student/login/">Student</a> · <a href="/instructor/login/">Instructor</a> · <a href="/administrator/login/">Admin</a></p>
+  </form>
+</section>
+{% endblock %}
+{% block scripts %}<script>document.querySelector('#login-form').addEventListener('submit', login);</script>{% endblock %}

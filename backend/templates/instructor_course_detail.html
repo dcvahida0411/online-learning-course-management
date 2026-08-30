@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Manage Course | LearnSpace{% endblock %}
+{% block content %}
+<section class="container dashboard" id="instructor-course-page" data-course-id="{{ course_id }}">
+  <a class="back-link" href="/dashboard/instructor/">← Back to my courses</a>
+  <div id="instructor-course-overview"><p>Loading course…</p></div>
+  <section class="management-section"><h2>Add class</h2><form id="course-lesson-form" class="inline-form"><input name="title" placeholder="Class title" required><input name="position" type="number" min="1" value="1" required><input name="video_url" type="url" placeholder="Video URL (optional)"><input name="content" placeholder="Class content" required><label><input name="is_published" type="checkbox" checked> Publish for students</label><button class="button small">Add class</button></form><p id="lesson-form-message" class="form-message"></p></section>
+  <section class="management-section"><h2>Classes in this course</h2><div id="instructor-course-lessons" class="card-grid"></div></section>
+  <section class="management-section"><h2>Add task</h2><form id="course-task-form" class="inline-form"><input name="title" placeholder="Task title" required><input name="due_date" type="datetime-local" required><input name="max_marks" type="number" min="1" value="100" required><input name="test_link" type="url" placeholder="Task/test link (optional)"><input name="instructions" placeholder="Task instructions" required><button class="button small">Add task</button></form><p id="task-form-message" class="form-message"></p></section>
+  <section class="management-section"><h2>Tasks in this course</h2><div id="instructor-course-tasks" class="card-grid"></div></section>
+  <section class="management-section"><h2>Student submissions</h2><div id="instructor-course-submissions" class="table-wrap"></div></section>
+</section>
+{% endblock %}
+{% block scripts %}<script>loadInstructorCourse({{ course_id }});</script>{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Student Dashboard | LearnSpace{% endblock %}
+{% block content %}
+<section class="container dashboard">
+  <p class="eyebrow">STUDENT DASHBOARD</p>
+  <h1 id="welcome">Welcome</h1>
+  <div class="section-heading"><div><h2>My courses</h2><p class="page-description">Open a course to view its classes, tasks, and progress.</p></div></div>
+  <div id="enrollment-list" class="card-grid"><p>Loading your courses…</p></div>
+</section>
+{% endblock %}
+{% block scripts %}<script>loadStudentDashboard();</script>{% endblock %}

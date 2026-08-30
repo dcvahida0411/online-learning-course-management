@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Course | LearnSpace{% endblock %}
+{% block content %}
+<section class="container" id="course-detail" data-course-id="{{ course_id }}">
+  <p class="eyebrow">COURSE DETAILS</p>
+  <div id="course-overview"><p>Loading course…</p></div>
+  <section id="course-learning-content" class="hidden">
+    <h2>Classes</h2><div id="course-lessons" class="card-grid"></div>
+    <h2>Tasks & tests</h2><div id="course-assignments" class="card-grid"></div>
+    <h2>My task submissions</h2><div id="course-submissions" class="table-wrap"></div>
+  </section>
+</section>
+{% endblock %}
+{% block scripts %}<script>loadCourseDetail({{ course_id }});</script>{% endblock %}
