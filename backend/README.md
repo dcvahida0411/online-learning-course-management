@@ -82,6 +82,8 @@ DEFAULT_FROM_EMAIL=LearnSpace <your-email@example.com>
 
 For Gmail, use a Google App Password rather than the normal account password.
 
+The password recovery flow is available at `/forgot-password/`. It emails a one-time reset link and uses Django's password-reset token validation.
+
 ## Testing
 
 ```powershell

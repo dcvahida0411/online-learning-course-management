@@ -13,6 +13,14 @@ def register_page(request):
     return student_register_page(request)
 
 
+def forgot_password_page(request):
+    return render(request, 'forgot_password.html')
+
+
+def reset_password_page(request):
+    return render(request, 'reset_password.html')
+
+
 def student_login_page(request):
     return render(request, 'login.html', {'account_type': 'Student', 'expected_role': 'student'})
 

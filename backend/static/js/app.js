@@ -580,6 +580,49 @@ async function saveCourseTask(event, taskId, courseId) {
   } catch (error) { alert(error.message); }
 }
 
+async function requestPasswordReset(event) {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  const messageBox = document.querySelector('#form-message');
+  try {
+    const response = await request('auth/password-reset/', {
+      method: 'POST', body: JSON.stringify({email: form.get('email')})
+    });
+    messageBox.textContent = response.detail;
+    messageBox.classList.add('success-message');
+  } catch (error) {
+    messageBox.textContent = error.message;
+  }
+}
+
+async function confirmPasswordReset(event) {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  const messageBox = document.querySelector('#form-message');
+  const password = form.get('password');
+  if (password !== form.get('confirm_password')) {
+    messageBox.textContent = 'The passwords do not match.';
+    return;
+  }
+  const query = new URLSearchParams(window.location.search);
+  const uid = query.get('uid');
+  const tokenValue = query.get('token');
+  if (!uid || !tokenValue) {
+    messageBox.textContent = 'This password reset link is incomplete.';
+    return;
+  }
+  try {
+    const response = await request('auth/password-reset/confirm/', {
+      method: 'POST', body: JSON.stringify({uid, token: tokenValue, password})
+    });
+    messageBox.textContent = response.detail;
+    messageBox.classList.add('success-message');
+    setTimeout(() => { window.location.href = '/student/login/'; }, 1500);
+  } catch (error) {
+    messageBox.textContent = error.message;
+  }
+}
+
 async function loadInstructorDashboard() {
   try {
     const user = await profile();
