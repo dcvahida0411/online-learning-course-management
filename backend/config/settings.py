@@ -144,6 +144,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+# Uploaded media is served by Django only for local development. Production
+# deployments should serve this path through Nginx or object storage instead.
+SERVE_MEDIA = DEBUG or os.getenv('DJANGO_SERVE_MEDIA', 'false').lower() == 'true'
 
 AUTH_USER_MODEL = 'users.User'
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5173').split(',')

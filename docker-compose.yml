@@ -5,6 +5,8 @@ services:
       POSTGRES_DB: learnspace
       POSTGRES_USER: learnspace
       POSTGRES_PASSWORD: change-this-password
+    ports:
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -21,6 +23,7 @@ services:
     environment:
       DJANGO_SECRET_KEY: replace-with-a-long-random-production-secret-key
       DJANGO_DEBUG: "false"
+      DJANGO_SERVE_MEDIA: "true"
       DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
       DB_ENGINE: postgresql
       POSTGRES_DB: learnspace
@@ -28,6 +31,8 @@ services:
       POSTGRES_PASSWORD: change-this-password
       POSTGRES_HOST: db
       POSTGRES_PORT: "5432"
+    volumes:
+      - ./backend/media:/app/media
     depends_on:
       db:
         condition: service_healthy
