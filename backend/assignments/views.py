@@ -7,7 +7,6 @@ from enrollments.services import refresh_course_progress, refresh_enrollment_pro
 from .models import Assignment, Submission
 from .serializers import AssignmentSerializer, SubmissionSerializer
 
-
 class AssignmentViewSet(viewsets.ModelViewSet):
     """Allow instructors to manage assignments for their own courses."""
 
@@ -44,7 +43,6 @@ class AssignmentViewSet(viewsets.ModelViewSet):
         course = instance.course
         instance.delete()
         refresh_course_progress(course)
-
 
 class SubmissionViewSet(viewsets.ModelViewSet):
     """Let students submit work and instructors grade work for their courses."""

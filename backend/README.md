@@ -104,6 +104,28 @@ docker compose up --build
 
 The backend will be available at `http://127.0.0.1:8000/`.
 
+### Make the Docker link publicly reachable
+
+Docker publishes port 8000 on the computer running Docker; it does not create
+an internet-facing URL by itself. To share the application, run Docker on a
+server with a public IP or domain, allow inbound TCP traffic on the published
+port in its firewall/security group, and set the host name that Django should
+accept before starting the containers:
+
+```powershell
+$env:DJANGO_ALLOWED_HOSTS = "your-domain.example.com,203.0.113.10"
+docker compose up --build -d
+```
+
+Then share `http://your-domain.example.com:8000/` (or the public IP with
+`:8000`). For a normal production URL without `:8000`, put Nginx or another
+reverse proxy on ports 80/443; see [`docs/nginx.conf.example`](../docs/nginx.conf.example).
+
+If Docker is running on a personal computer behind a home/office router, the
+router must forward the selected port to that computer, and Windows Firewall
+must allow it. A private address such as `localhost`, `127.0.0.1`, or
+`192.168.x.x` is not reachable by everyone on the internet.
+
 ## Production notes
 
 - Set `DJANGO_DEBUG=false` and use a strong `DJANGO_SECRET_KEY`.

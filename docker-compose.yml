@@ -19,12 +19,12 @@ services:
     build: ./backend
     command: sh -c "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT:-8000}:8000"
     environment:
       DJANGO_SECRET_KEY: replace-with-a-long-random-production-secret-key
       DJANGO_DEBUG: "false"
       DJANGO_SERVE_MEDIA: "true"
-      DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
       DB_ENGINE: postgresql
       POSTGRES_DB: learnspace
       POSTGRES_USER: learnspace
