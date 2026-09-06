@@ -10,7 +10,6 @@ services:
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
-    dockerCommand: sh -c "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:10000"
     plan: free
     healthCheckPath: /
     envVars:
